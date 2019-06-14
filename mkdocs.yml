@@ -17,18 +17,15 @@ nav:
     - INTRODUCTION:
         - Issue describe: issue/README.md
     - TECHNICAL RESEARCH:
-        - Kafka:
-           - Index: issue/need_review/Kafka/README.md
-        - Rabbit_mq:
-           - Index: issue/need_review/Rabbit/README.md
-        - Qpid_dispatch_route:
-           - Index: issue/need_review/Qdr/README.md
+        - Kafka: issue/need_review/Kafka/README.md
+        - Rabbit_mq: issue/need_review/Rabbit/README.md
+        - Qpid_dispatch_route: issue/need_review/Qdr/README.md
     - BLUEPRINT:
         - Propose: issue/propose/README.md
         - Start: issue/start/README.md
         - In process: issue/in_process/README.md
         - Need review: issue/need_review/README.md
-        - Sloved: issue/sloved/README.md
+        - Sloved: issue/solved/README.md
     - ABOUT:
         - Release Notes: about/release-notes.md
         - Contributing: about/contributing.md
