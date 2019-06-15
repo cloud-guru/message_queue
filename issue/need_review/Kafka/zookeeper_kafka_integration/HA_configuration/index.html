@@ -159,14 +159,13 @@
           <div role="main">
             <div class="section">
               
-                <h3 id="noi-dung">Nội dung<a class="headerlink" href="#noi-dung" title="Permanent link">&para;</a></h3>
-<p>Mục đích bài viết là chỉ ra cách cấu hình một cụm zookeeper 3 node cùng kafka gồm 3 broker có thể failover : 1 kafka, 1 zookeeper hay 1 host chết vẫn có thể hoạt động bình thường;</p>
-<h3 id="mo-hinh">Mô hình<a class="headerlink" href="#mo-hinh" title="Permanent link">&para;</a></h3>
+                <h1 id="noi-dung">Nội dung<a class="headerlink" href="#noi-dung" title="Permanent link">&para;</a></h1>
+<p>Bài viết là chỉ ra cách cấu hình một cụm zookeeper 3 node cùng kafka gồm 3 broker có thể failover : 1 kafka, 1 zookeeper hay 1 host chết vẫn có thể hoạt động bình thường;</p>
+<h1 id="mo-hinh">Mô hình<a class="headerlink" href="#mo-hinh" title="Permanent link">&para;</a></h1>
 <p><img alt="" src="../../images/zoo4.PNG" /></p>
-<h3 id="cai-at">Cài đặt<a class="headerlink" href="#cai-at" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>Tạo user , dowload kafka-zookeeper</strong></li>
-</ul>
+<h1 id="cai-at">Cài đặt<a class="headerlink" href="#cai-at" title="Permanent link">&para;</a></h1>
+<h3 id="chuan-bi">Chuẩn bị<a class="headerlink" href="#chuan-bi" title="Permanent link">&para;</a></h3>
+<p>Tạo user , dowload kafka-zookeeper:</p>
 <p>Tạo user kafka</p>
 <pre><code>sudo useradd kafka -m
 sudo passwd kafka
@@ -181,11 +180,9 @@ tar -xvzf ~/kafka.tgz --strip 1
 </code></pre>
 
 <p>Các file chạy, cấu hình hiện đã giải nén ra thư mục ~/kafka</p>
-<ul>
-<li><strong>Thực hiện cấu hình</strong> </li>
-</ul>
-<p>Cấu hình cụm zookeeper: làm trên tất cả các host:</p>
-<p>bước 1:) Sửa file kafka/config/zookeeper.properties thành nội dung:</p>
+<h3 id="cau-hinh-cum-zookeeper">Cấu hình cụm zookeeper<a class="headerlink" href="#cau-hinh-cum-zookeeper" title="Permanent link">&para;</a></h3>
+<p>Làm trên tất cả các host:</p>
+<p><b>Bước 1:</b></br> Sửa file kafka/config/zookeeper.properties thành nội dung:</p>
 <pre><code>initLimit=5
 syncLimit=2
 dataDir=/home/kafka/Data/zookeeper
@@ -198,21 +195,22 @@ server.3=192.168.2.193:2888:3888
 <p>Trong đó  port 2181 cho client connections; 2888 cho follower connections (nếu nó là zookeeper leader); and 3888 cho các server khác kết nối khi quá trình bầu leader đang diễn ra.</p>
 <p>&ldquo;server.1=192.168.2.194&rdquo; tức ta đã khai báo zookeeper id cho host 192.168.2.194 là id 1</p>
 <p>Trỏ &ldquo;dataDir=/home/kafka/Data/zookeeper&rdquo; thì ta cũng cần tạo một thư mục trống /home/kafka/Data/zookeeper</p>
-<p>bước 2:) vào thư mục /home/kafka/Data/zookeeper , tạo file myid, nội dung là zookeeper id ở trên:</p>
+<p><b>Bước 2:</b></br> vào thư mục /home/kafka/Data/zookeeper , tạo file myid, nội dung là zookeeper id ở trên:</p>
 <p>ví dụ với host zookeeper 1 : 192.168.2.194</p>
 <pre><code>echo &quot;1&quot; &gt; /home/kafka/Data/zookeeper/myid
 </code></pre>
 
-<p>Bước 3:) chạy zookeeper trên mỗi host:</p>
+<p><b>Bước 3:</b></br> chạy zookeeper trên mỗi host:</p>
 <pre><code>/home/kafka/kafka/bin/zookeeper-server-start.sh /home/kafka/kafka/config/zookeeper.properties
 </code></pre>
 
-<p>Cấu hình cụm kafka: làm trên tất cả các host:</p>
-<p>bước 1:) Sửa file ~/kafka/config/server.properties</p>
+<h3 id="cau-hinh-cum-kafka">Cấu hình cụm kafka<a class="headerlink" href="#cau-hinh-cum-kafka" title="Permanent link">&para;</a></h3>
+<p>Làm trên tất cả các host:</p>
+<p><b> Bước 1:</b></br> Sửa file ~/kafka/config/server.properties</p>
 <p>Thay <code>broker.id=x</code>với x là id kafka của từng host, vd host 192.168.2.194 <code>broker.id=1</code></p>
 <p>Liệt kê host trong cụm zookeeper tại <code>zookeeper.connect=&lt;host&gt;:port</code>. ví dụ với cụm trên <code>zookeeper.connect=192.168.2.194:2181,192.168.2.193:2181,192.168.2.53:2181</code></p>
 <p>Thêm dòng: <code>delete.topic.enable = true</code> cho phép kafka broker có thể xóa topic.</p>
-<p>bước 2:) chạy kafka:</p>
+<p><b> Bước 2:</b></br> chạy kafka:</p>
 <pre><code>/bin/sh -c '/home/kafka/kafka/bin/kafka-server-start.sh /home/kafka/kafka/config/server.properties &gt; /home/kafka/kafka/kafka.log 2&gt;&amp;1'
 </code></pre>
 
@@ -220,7 +218,7 @@ server.3=192.168.2.193:2888:3888
 <li><strong>Tạo replicate cho topic __consumer_offsets</strong></li>
 </ul>
 <p>__consumer_offsets là topic được tạo mặc định, rất quan trọng vì nó giữ vị trí offset đang đọc tới của consummer. Tuy nhiên khi mới tạo nó sẽ lấy replicate 1 cùng patition 50. Ta cần tăng số replicate của nó lên. </p>
-<p>bước 1:)Tạo file inc-replication-factor.json với nội dung:</p>
+<p><b>Bước 1:</b></br>Tạo file inc-replication-factor.json với nội dung:</p>
 <pre><code>{&quot;version&quot;:1,
  &quot;partitions&quot;:[
    {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:0,  &quot;replicas&quot;:[1, 2, 3]},
@@ -277,13 +275,13 @@ server.3=192.168.2.193:2888:3888
 }
 </code></pre>
 
-<p>bước 2:) Thực hiện partition reassignment:</p>
+<p><b>Bước 2:</b></br> Thực hiện partition reassignment:</p>
 <pre><code>~/kafka/bin/kafka-reassign-partitions.sh --zookeeper 192.168.2.193:2181 \
     --reassignment-json-file /home/kafka/inc-replication-factor.json  \
     --execute
 </code></pre>
 
-<p>Kiểm tra kết quả:</p>
+<h3 id="kiem-tra-ket-qua">Kiểm tra kết quả:<a class="headerlink" href="#kiem-tra-ket-qua" title="Permanent link">&para;</a></h3>
 <pre><code>~/kafka/bin/kafka-topics.sh --zookeeper 192.168.2.193 --describe --topic __consumer_offsets
 </code></pre>
 

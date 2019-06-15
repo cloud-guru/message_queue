@@ -8,7 +8,7 @@
   
   <meta name="author" content="Hoa Ngo">
   <link rel="shortcut icon" href="../../../../img/favicon.ico">
-  <title>Architecture - messeage queue</title>
+  <title>Tổng quan - messeage queue</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../../../css/theme.css" type="text/css" />
@@ -17,7 +17,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Architecture";
+    var mkdocs_page_name = "T\u1ed5ng quan";
     var mkdocs_page_input_path = "issue/need_review/Kafka/Architecture.md";
     var mkdocs_page_url = "/message_queue/issue/need_review/Kafka/Architecture/";
   </script>
@@ -149,7 +149,7 @@
     
       
     
-    <li>Architecture</li>
+    <li>Tổng quan</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -159,7 +159,7 @@
           <div role="main">
             <div class="section">
               
-                <h3 id="tong-quan">Tổng quan<a class="headerlink" href="#tong-quan" title="Permanent link">&para;</a></h3>
+                <h1 id="tong-quan">Tổng quan<a class="headerlink" href="#tong-quan" title="Permanent link">&para;</a></h1>
 <p><img alt="" src="../images/kafka_atr1.PNG" /></p>
 <ul>
 <li>Thành phần core của kiến trúc kafka là cụm các broker, có nhiệm vụ nhận về các messeage, phân chia logic topic, lưu trữ trên đĩa, nhân bản và phục hồi dữ liệu giữa các node, trả dữ liệu cho consumer khi yêu cầu</li>
@@ -168,10 +168,10 @@
 <li>Consumer kết nối , subscribe các topic lấy messeage về xử lý</li>
 <li>Zookeeper cung cấp một khung nhìn đồng bộ về cấu hình Kafka Cluster: có các broker nào, broker chứa các partition nào của topic, broker nào làm leader trong các partition topic, topic nào đang tạo, xóa, vị trí hiện tại, replicate, pending&hellip;, liên tục gửi các thay đổi cho kafka</li>
 </ul>
-<h3 id="topic-architecture">Topic architecture<a class="headerlink" href="#topic-architecture" title="Permanent link">&para;</a></h3>
+<h1 id="to-chuc-messeage-queue">Tổ chức messeage queue<a class="headerlink" href="#to-chuc-messeage-queue" title="Permanent link">&para;</a></h1>
 <ul>
 <li>
-<p>Mỗi topic như một chủ đề mà producer publish - consumer subscribe . Topic được lưu thành một số một partition lưu vào các broker. Việc chọn cho partition vào broker nào hoàn toàn có thể cấu hình.
+<p>Messeage tổ chức ra các topic. Mỗi topic như một chủ đề mà producer publish - consumer subscribe . Topic được lưu thành một số  partition lưu vào các broker. Việc chọn cho partition vào broker nào hoàn toàn có thể cấu hình kiểm soát.
 <img alt="" src="../images/kafka_atrtop.png" /></p>
 </li>
 <li>
@@ -192,7 +192,7 @@
 </li>
 </ul>
 <p><img alt="" src="../images/kafka_atrtop2.png" /></p>
-<h3 id="consumer-and-producers-architecture">Consumer and Producers architecture<a class="headerlink" href="#consumer-and-producers-architecture" title="Permanent link">&para;</a></h3>
+<h1 id="consumer-va-producers">Consumer và Producers<a class="headerlink" href="#consumer-va-producers" title="Permanent link">&para;</a></h1>
 <p>Consumer với nhiệm vụ lấy dữ liệu từ kafka, thì có thể tổ chức thành các consumer group. Mục đích: tăng cường tốc độ đọc, failover. Cụ thể: </p>
 <ul>
 <li>Kafka quy định: bất kỳ lúc nào, mỗi partition chỉ được 1 consumer trong mỗi consumer group đọc. 
@@ -225,7 +225,7 @@ Consumer vào làm việc, sẽ lấy vào &ldquo;latest committed offset&rdquo;
 <li>Idempotent : đảm với 1 messeage yêu cầu ghi thì chỉ đúng 1 messeage xuất hiện trong topic</li>
 <li>Transactional : đảm bảo một nhóm các messeage cùng được gửi với nhau.</li>
 </ul>
-<h2 id="zookeeper">Zookeeper<a class="headerlink" href="#zookeeper" title="Permanent link">&para;</a></h2>
+<h1 id="zookeeper">Zookeeper<a class="headerlink" href="#zookeeper" title="Permanent link">&para;</a></h1>
 <h3 id="kien-truc-zookeeper"><a href="../zookeeper_kafka_integration/zookeeper/">Kiến trúc zookeeper</a><a class="headerlink" href="#kien-truc-zookeeper" title="Permanent link">&para;</a></h3>
 <h3 id="ha-voi-zookeeper"><a href="../zookeeper_kafka_integration/HA_configuration/">HA với zookeeper</a><a class="headerlink" href="#ha-voi-zookeeper" title="Permanent link">&para;</a></h3>
 <h3 id="ref">Ref<a class="headerlink" href="#ref" title="Permanent link">&para;</a></h3>

@@ -8,7 +8,7 @@
   
   <meta name="author" content="Hoa Ngo">
   <link rel="shortcut icon" href="../../../../img/favicon.ico">
-  <title>Intro - messeage queue</title>
+  <title>Tổng quan - messeage queue</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../../../css/theme.css" type="text/css" />
@@ -17,7 +17,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Intro";
+    var mkdocs_page_name = "T\u1ed5ng quan";
     var mkdocs_page_input_path = "issue/need_review/Kafka/Intro.md";
     var mkdocs_page_url = "/message_queue/issue/need_review/Kafka/Intro/";
   </script>
@@ -149,7 +149,7 @@
     
       
     
-    <li>Intro</li>
+    <li>Tổng quan</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -159,7 +159,7 @@
           <div role="main">
             <div class="section">
               
-                <h3 id="tong-quan">Tổng quan<a class="headerlink" href="#tong-quan" title="Permanent link">&para;</a></h3>
+                <h1 id="tong-quan">Tổng quan<a class="headerlink" href="#tong-quan" title="Permanent link">&para;</a></h1>
 <ul>
 <li>
 <p>Khái niệm:
@@ -178,34 +178,33 @@ Kafka is a publish-subscribe distributed, partitioned, replicated commit log ser
 <li>Producer, consumer có thể khởi động những tool như console_producer, console_consumer kafka cung cấp, hay các application tự viết dùng các api.</li>
 <li>Các application sử dụng các 4 loại API (Producer API, Consumer API, Streams API và  Connector API) thực hiện các tương tác mong muốn . </li>
 </ul>
-<h3 id="ac-trung">Đặc trưng<a class="headerlink" href="#ac-trung" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Publish-Subscribe Messaging System
-<img alt="" src="../images/kafka_pubsub.png" /></li>
-</ul>
+<h1 id="ac-trung">Đặc trưng<a class="headerlink" href="#ac-trung" title="Permanent link">&para;</a></h1>
+<h3 id="publish-subscribe-messaging-system">Publish-Subscribe Messaging System<a class="headerlink" href="#publish-subscribe-messaging-system" title="Permanent link">&para;</a></h3>
+<p><img alt="" src="../images/kafka_pubsub.png" /></p>
 <p>Ta có 2 loại hệ thống messeages truyền thống:</p>
 <p>&nbsp;    &nbsp;- Với những hệ thống &ldquo;Queuing&rdquo;. Messages tổ chức thành các queue, một hoặc nhiều consummer lấy message từ queue và chủ động xóa messeage đó khỏi queue. </p>
 <p>&nbsp;    &nbsp;- Với những hệ thống &ldquo;Publish-Subscribe&rdquo;. Messeages tổ chức thành một hoặc nhiều topic. Consumers có thể chọn subscribe các toppic mà mình muốn đọc. <br/></p>
-<p>Kafka mang đặc điểm của hệ Publish-Subscribe nhưng có điểm đặc biệt:</p>
+<p><b> Kafka mang đặc điểm của hệ Publish-Subscribe nhưng có điểm đặc biệt: </b></p>
 <p>&nbsp;    &nbsp;- Với hệ thống Publish-Subscribe truyền thống, mỗi messeage sẽ được broad cast ra cho tất cả các consumer. vd: nếu messeage đến là m1, m2, m3. các consumer sẽ đều nhận được m1, m2, m3</p>
 <p>&nbsp;    &nbsp;- Với kafka, cho phép cơ chế nhóm các consumer để mỗi consumer trong nhóm có thể nhận một phần luồng tin.  vd: nếu messeage đến là m1, m2, m3. cho phép consummer1 nhận m1, consumer2 nhận m2 , consumer 3 nhận m3. (với điều kiện consumer 1, 2, 3 cùng group; nếu khác group, messeage sẽ broad cast như bình thường) </br></p>
 <p>&nbsp;    &nbsp;Mục đích việc này là giúp cho scale process xử lý của consumer, chia ra mỗi consumer xử lý một phần của luồng messeage.</p>
-<p>Kafka sẽ không thực hiện:</p>
+<p><b> Kafka sẽ không thực hiện: </b></p>
 <p>&nbsp;    &nbsp; - Theo dõi xem topic chỉ giới hạn cho consumer nào nhận ,hay consumer đã nhận được message chưa (no check ack form consumer).</p>
 <p>&nbsp;    &nbsp; - Không có thao tác delete, messeages sẽ được giữ trong khoảng thời gian xác định và tự động xóa.</p>
 <p>&nbsp;    &nbsp; - Không random access vào từng messeage. Consumers chỉ ra sẽ nhận messeage từ offset bao nhiêu của topic thì sẽ nhận được các message, bắt đầu từ offset đó.<br/></p>
 <p>&nbsp;    &nbsp;Như vậy, trách nhiệm của consumer trong xử lý dữ liệu từ kafka là rất lớn. Kafka không có trách nhiệm push() messeage cho consumer, mà consumer sẽ poll() messeage cần về, tùy theo năng lực xử lý của nó.
-<br/> Một số thảo luận https://www.quora.com/How-do-I-verify-if-Kafka-Consumer-consumed-messages
-* Tốc độ nhanh:<br/>
-Với một máy đơn cài đặt Kafka có thể xử lý số lượng dữ liệu từ việc đọc và ghi lên tới hàng trăm megabyte trong một giây từ hàng ngàn máy khách.<br/>
+<br/> Một số thảo luận về điều này <br/> 
+https://www.quora.com/How-do-I-verify-if-Kafka-Consumer-consumed-messages</p>
+<h3 id="toc-o-nhanh">Tốc độ nhanh<a class="headerlink" href="#toc-o-nhanh" title="Permanent link">&para;</a></h3>
+<p>Với một máy đơn cài đặt Kafka có thể xử lý số lượng dữ liệu từ việc đọc và ghi lên tới hàng trăm megabyte trong một giây từ hàng ngàn máy khách.<br/>
 vd benchmark cho kafka trên các hệ thống cloud:<br/>
 <img alt="" src="../images/kafka_benchmark.PNG" />
-theo https://hackernoon.com/benchmarking-kafka-performance-part-1-write-throughput-7c7a76ab7db1
-* Khả năng mở rộng:<br/>
-Kafka được thiết kế cho phép dễ dàng được mở rộng và trong suốt với người dùng (không downtime khi thêm một nút máy chủ mới vào cụm). Luồng dữ liệu sẽ được phân chia và được vận chuyển tới các nút trong cụm, do đó cho phép trung chuyển các dữ liệu mà có khối lượng lớn hơn nhiều so với sức chứa của một máy đơn.
-* Độ tin cậy:<br/>
-Dữ liệu vào hàng đợi sẽ được lưu trữ trên ổ đĩa và được sao chép tới các nút khác trong cụm để ngăn ngừa việc mất dữ liệu, đảm bảo tính chịu lỗi cao.</p>
-<h3 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">&para;</a></h3>
+theo https://hackernoon.com/benchmarking-kafka-performance-part-1-write-throughput-7c7a76ab7db1</p>
+<h3 id="kha-nang-mo-rong">Khả năng mở rộng:<br/><a class="headerlink" href="#kha-nang-mo-rong" title="Permanent link">&para;</a></h3>
+<p>Kafka được thiết kế cho phép dễ dàng được mở rộng và trong suốt với người dùng (không downtime khi thêm một nút máy chủ mới vào cụm). Luồng dữ liệu sẽ được phân chia và được vận chuyển tới các nút trong cụm, do đó cho phép trung chuyển các dữ liệu mà có khối lượng lớn hơn nhiều so với sức chứa của một máy đơn.</p>
+<h3 id="o-tin-cay">Độ tin cậy:<br/><a class="headerlink" href="#o-tin-cay" title="Permanent link">&para;</a></h3>
+<p>Dữ liệu vào hàng đợi sẽ được lưu trữ trên ổ đĩa và được sao chép tới các nút khác trong cụm để ngăn ngừa việc mất dữ liệu, đảm bảo tính chịu lỗi cao.</p>
+<h2 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">&para;</a></h2>
 <p>https://techbeacon.com/what-apache-kafka-why-it-so-popular-should-you-use-it</p>
 <p>https://www.confluent.io/blog/apache-kafka-vs-enterprise-service-bus-esb-friends-enemies-or-frenemies/?fbclid=IwAR3A_Lcl7sgRTinzJUUwyQwNBm8V_3vCokFXuZcomXD1NlPNDmpb34f41po</p>
 <p>https://www.tutorialspoint.com/apache_kafka/index.htm</p>

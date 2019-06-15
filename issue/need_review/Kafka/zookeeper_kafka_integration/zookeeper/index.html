@@ -160,11 +160,12 @@
             <div class="section">
               
                 <h3 id="tong-quan">Tổng quan:<a class="headerlink" href="#tong-quan" title="Permanent link">&para;</a></h3>
-<p>Zookeeper là một dịch vụ dùng đến khi muốn duy trì sự thống nhất thông tin của các service chạy cluster: distributed configuration management , consensus building through coordination and locks. </p>
+<p>Zookeeper là một dịch vụ dùng nhằm duy trì sự thống nhất thông tin cấu hình của các service chạy cluster: 
+* distributed configuration management 
+* consensus building through coordination and locks. </p>
 <p>Zookeeper luôn cài kèm khi ta cài Kafka, giúp các kafka-broker đạt được sự đồng thuận về các thông tin như: số lượng, id, địa chỉ của các broker; mỗi topic có bao nhiêu partition, mỗi partition nằm tại broker nào; khi có reassigne, rebalance topic sẽ thống nhất chuyển patition về đâu, và một số thông tin phụ khác</p>
-<p>(Trong stream4flow, zookeeper cũng chỉ có vai trò giúp kafka trong đạt đồng thuận)</p>
-<p>Như vậy về cơ bản , ý nghĩa của zookeeper cũng giống etcd : lưu các thông tin của cluster, thông báo khi có thay đổi. Một so sánh 2 service: https://stackshare.io/stackups/etcd-vs-zookeeper</p>
-<p>Các thao tác vận hành zookeeper chỉ xoay quanh thêm, sửa xóa dữ liệu lưu trên zookeeper.</p>
+<p>Về cơ bản , ý nghĩa của zookeeper cũng giống etcd : lưu các thông tin của cluster, thông báo khi có thay đổi. Một so sánh 2 service: https://stackshare.io/stackups/etcd-vs-zookeeper</p>
+<p>Các thao tác vận hành zookeeper cũng như etcd, chỉ xoay quanh: thêm, sửa xóa dữ liệu về cấu hình cluster lưu trên zookeeper.</p>
 <h3 id="to-chuc-du-lieu-trong-zookeeper">Tổ chức dữ liệu trong zookeeper:<a class="headerlink" href="#to-chuc-du-lieu-trong-zookeeper" title="Permanent link">&para;</a></h3>
 <p>Dữ liệu trong zookeeper tổ chức như dạng cây, cây thư mục: </p>
 <p><img alt="" src="../../images/zoo.PNG" /></p>
@@ -177,8 +178,8 @@
 </ul>
 <h3 id="thuc-hanh">Thực hành :<a class="headerlink" href="#thuc-hanh" title="Permanent link">&para;</a></h3>
 <p>Sau khi cài kafka, thường ta đã có zookeeper chạy kèm, cổng 2181</p>
-<p>a) thao tác với console:</p>
-<p>Vào thư mục cài kafka ( ~/kafka), mở zookeeper console với:</p>
+<p>a) Thao tác với console:</p>
+<p>Vào thư mục cài kafka ( ~/kafka), mở zookeeper console với lệnh:</p>
 <pre><code>bin/zookeeper-shell.sh localhost:2181
 
 Connecting to localhost:2181
@@ -192,7 +193,7 @@ WatchedEvent state:SyncConnected type:None path:null
 </code></pre>
 
 <ul>
-<li>Xem các một node bất kỳ: lệnh ls</li>
+<li>Xem các cấu hình một cluster bất kỳ: lệnh ls</li>
 </ul>
 <pre><code>ls /
 [cluster, controller, brokers, zookeeper, foo, admin, isr_change_notification, log_dir_event_notification, controller_epoch, kafka-manager, consumers, latest_producer_id_block, config]
@@ -239,9 +240,10 @@ Created /zk_test/Child1
 
 <p>Ta sẽ tạo ra 1 web-UI lắng nghe cổng 8080. user:password zookeeper:zookeeper</p>
 <p><img alt="" src="../../images/zooweb.PNG" /></p>
-<p>Chọn vào host zookeeper : vd 192.168.2.194:2181 ( dùng localhost:2181 có thể lỗi do container không phân giải localhost là gì được). Ta có danh sách các Node nối với root
+<p>Chọn vào host zookeeper : vd 192.168.2.194:2181 . Ta có danh sách các Node nối với root
 <img alt="" src="../../images/zooweb1.PNG" /></p>
 <p>CLick vào từng node để xem tiếp theo. Thêm sửa xóa ở gần chỗ footer của website.</p>
+<h3 id="su-dung-zookeeper-ket-hop-voi-kafka"><a href="../HA_configuration/">Sử dụng zookeeper kết hợp với kafka</a><a class="headerlink" href="#su-dung-zookeeper-ket-hop-voi-kafka" title="Permanent link">&para;</a></h3>
               
             </div>
           </div>
