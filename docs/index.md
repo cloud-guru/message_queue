@@ -1,5 +1,5 @@
-# Chào mừng 
-Chào mừng đến với các nghiên cứu liên quan đến messeage queue
+# Giới thiệu
+Các nghiên cứu liên quan đến messeage queue
 
 Xem online tại:
 https://cloud-guru.github.io/message_queue/

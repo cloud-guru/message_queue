@@ -3,7 +3,7 @@
 Kafka is a publish-subscribe distributed, partitioned, replicated commit log service. It provides the functionality of a messaging system, but with a unique design.
 
 * Hoạt động cơ bản: <br/>
-![](../images/kafka_basic.PNG)
+![](images/kafka_basic.PNG)
 
   - Kafka lưu trữ các message thành các category gọi là topic
   - Kafka được triển khai theo mô hình cluster gồm một hoặc nhiều server. Mỗi server trong cluster này được gọi là một "broker", nhiệm vụ như một kho lưu trữ các message.
@@ -14,7 +14,7 @@ Kafka is a publish-subscribe distributed, partitioned, replicated commit log ser
 
 ### Đặc trưng
 * Publish-Subscribe Messaging System
-![](../images/kafka_pubsub.png)
+![](images/kafka_pubsub.png)
 
 Ta có 2 loại hệ thống messeages truyền thống:
 
@@ -43,7 +43,7 @@ Kafka sẽ không thực hiện:
 * Tốc độ nhanh:<br/>
 Với một máy đơn cài đặt Kafka có thể xử lý số lượng dữ liệu từ việc đọc và ghi lên tới hàng trăm megabyte trong một giây từ hàng ngàn máy khách.<br/>
 vd benchmark cho kafka trên các hệ thống cloud:<br/>
-![](../images/kafka_benchmark.PNG)
+![](images/kafka_benchmark.PNG)
 theo https://hackernoon.com/benchmarking-kafka-performance-part-1-write-throughput-7c7a76ab7db1
 * Khả năng mở rộng:<br/>
 Kafka được thiết kế cho phép dễ dàng được mở rộng và trong suốt với người dùng (không downtime khi thêm một nút máy chủ mới vào cụm). Luồng dữ liệu sẽ được phân chia và được vận chuyển tới các nút trong cụm, do đó cho phép trung chuyển các dữ liệu mà có khối lượng lớn hơn nhiều so với sức chứa của một máy đơn.

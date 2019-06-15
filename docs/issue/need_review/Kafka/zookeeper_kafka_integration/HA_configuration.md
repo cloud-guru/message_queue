@@ -4,7 +4,7 @@ Mục đích bài viết là chỉ ra cách cấu hình một cụm zookeeper 3 
 
 ### Mô hình 
 
-![](../../images/zoo4.PNG)
+![](../images/zoo4.PNG)
 
 ### Cài đặt
 

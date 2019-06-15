@@ -1,6 +1,6 @@
 ### Tổng quan
 
-![](../images/kafka_atr1.PNG)
+![](images/kafka_atr1.PNG)
 
 * Thành phần core của kiến trúc kafka là cụm các broker, có nhiệm vụ nhận về các messeage, phân chia logic topic, lưu trữ trên đĩa, nhân bản và phục hồi dữ liệu giữa các node, trả dữ liệu cho consumer khi yêu cầu
 * Producer , Consumer là các node chạy các application sử dụng các API kafka,
@@ -11,7 +11,7 @@
 ### Topic architecture
 
 * Mỗi topic như một chủ đề mà producer publish - consumer subscribe . Topic được lưu thành một số một partition lưu vào các broker. Việc chọn cho partition vào broker nào hoàn toàn có thể cấu hình.
-![](../images/kafka_atrtop.png)
+![](images/kafka_atrtop.png)
 
 * Các message trong mỗi partition được sắp xếp tuần tự (không thay đổi) giống thứ tự đưa lên Kafka cluster của các message. Mỗi message trong một partition được gán cho một định danh thứ tự, được gọi là một offset.
 
@@ -19,13 +19,13 @@ Theo như hình, topic lưu ra 4 partition. Quá trình viết producer sẽ ph�
 
 * Với mỗi partition, tùy thuộc vào cấu hình sẽ có một số bản sao chép nhất định để đảm bảo dữ liệu không bị mất khi một node trong cụm bị hỏng.Mỗi broker lưu một bản sao ,chỉ số replicate không được vượt quá số lượng broker trong cụm. Bản chính của partition gọi là  “leader”. Khi ghi, các bản sao chép từ bản leader chứ không nhận dữ liệu trực tiếp từ producer ; các bản sao cũng không đọc song song bởi consumer, không có vai trò trong việc tối ưu đọc và ghi.
 
-![](../images/kafka_atrtop1.png)
+![](images/kafka_atrtop1.png)
 
 * Trên đĩa của các node broker, topic được lưu mức thấp thành các thư mục, file ( gọi là logs). Theo defaut thư mục lưu sẽ là ``/tmp/kafka-logs/`` . Trong thư mục, mỗi topic-patition sẽ thành một thư mục con, các message lưu trong các file log thuộc thư mục này.
 
 * Mặc định các logs lưu trong vòng 7 ngày (với restart thì thư mục /tmp/ sẽ mất nên cần chú ý cấu hình lại)
 
-![](../images/kafka_atrtop2.png)
+![](images/kafka_atrtop2.png)
 
 ### Consumer and Producers architecture
 
@@ -38,18 +38,18 @@ Consumer với nhiệm vụ lấy dữ liệu từ kafka, thì có thể tổ ch
 <br/> &nbsp;    &nbsp;- Group1: consummer0 nhận m0. consummer1 nhận m1. consummer2 nhận m2. consummer3 nhận m3
 <br/> &nbsp;    &nbsp;- Group2: consummer0 nhận m0,m1. consummer0 nhận m2,m3
 <br/> Giả sử là các consumer chạy cùng tiến trình spark, nhận message về, cùng xử lý và cùng đẩy kết quả ra một topic đích, thì hiệu năng xử lý sẽ tăng đáng kể.
-![](../images/kafka_atrcon2.png)
+![](images/kafka_atrcon2.png)
 * Ví dụ 1 consumer chết, các consumer khác trong group sẽ tiếp nhận thay các message từ message mà consumer chết nhận được cuối cùng => failover
 <br/> Tuy vậy ta thấy: theo cơ chế, kafka không track xem consumer đã nhận được message nào, vậy làm thế nào các consumer cùng group biết để takeover? 
 <br/> - Mỗi consumer khi đọc một messeage tại offset nhất định trên partition, sẽ thực hiện thao tác gọi là commit: ghi offset hiện tại vào một topic đặc biệt tên là __consumer_offsets topic.
 <br/> ví dụ: trong trường hợp trên, 2 consumer 3 và 4 chết. Kafka rebalance lại phân phối patititon cho group
 <br/> &nbsp;    &nbsp;- Group1: consummer0 nối part0,part3. consummer1 nối part1,part3. như hình dưới
-![](../images/kafka_atrcon3.png)
+![](images/kafka_atrcon3.png)
 Consumer vào làm việc, sẽ lấy vào "latest committed offset" của mối partition từ __consumer_offsets topic và takeover
 <br/> Chú ý rằng: nhiệm vụ commit thuộc về phía consumer, tức người lập trình ra ứng dụng, kafka broker không có nhiệm vụ gì trong này (ngoài tự động tạo ra __consumer_offsets topic).
 <br/> Việc commit có thể ảnh hưởng đến kết quả xử lý, vd:
 <br/> Thực tế đang xử lý tới offset 10, trong khi mới commit tới offset 2. Khi lỗi xảy ra buộc ta lại quay lại offset 2 xử lý. Đây có thể là lỗi - khi một messeage bị xử lý 2 lần; cũng có thể là tính năng: -vận dụng hợp lý sẽ như một điểm checkpoint cho luồng, mục đích là khi lỗi sẽ roolback để xử lý lại đoạn 2 đến 10.
-![](../images/kafka_atrcon4.png)
+![](images/kafka_atrcon4.png)
 
 
 Producer với nhiệm vụ đẩy dữ liệu vào kafka. Có một số điểm đáng chú ý sau:

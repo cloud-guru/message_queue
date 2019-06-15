@@ -22,7 +22,6 @@ nav:
         - Qpid_dispatch_route: issue/need_review/Qdr/README.md
     - BLUEPRINT:
         - Propose: issue/propose/README.md
-        - Start: issue/start/README.md
         - In process: issue/in_process/README.md
         - Need review: issue/need_review/README.md
         - Sloved: issue/solved/README.md

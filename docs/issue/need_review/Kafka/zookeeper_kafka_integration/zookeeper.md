@@ -14,7 +14,7 @@ Các thao tác vận hành zookeeper chỉ xoay quanh thêm, sửa xóa dữ li�
 
 Dữ liệu trong zookeeper tổ chức như dạng cây, cây thư mục: 
 
-![](../../images/zoo.PNG)
+![](../images/zoo.PNG)
 
 * Mỗi node trong cây gọi là zNode
 * Mỗi zNode được định danh bởi path đến node. ví dụ ở hình có 4 Znode: /; /Zoo; /Zoo/lion; /Zoo/tiger
@@ -93,9 +93,9 @@ docker run -d \
 
 Ta sẽ tạo ra 1 web-UI lắng nghe cổng 8080. user:password zookeeper:zookeeper
 
-![](../../images/zooweb.PNG)
+![](../images/zooweb.PNG)
 
 Chọn vào host zookeeper : vd 192.168.2.194:2181 ( dùng localhost:2181 có thể lỗi do container không phân giải localhost là gì được). Ta có danh sách các Node nối với root
-![](../../images/zooweb1.PNG)
+![](../images/zooweb1.PNG)
 
 CLick vào từng node để xem tiếp theo. Thêm sửa xóa ở gần chỗ footer của website.

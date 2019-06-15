@@ -132,6 +132,6 @@ docker run -d --net=host --restart unless-stopped --name kafka_manager -e ZK_HOS
 
 Một web-controll sẽ được mở ra tại cổng 9000
 <br/>
-![](../images/kakfa_drash.PNG)
+![](images/kakfa_drash.PNG)
 <br/>
 
