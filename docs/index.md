@@ -6,10 +6,10 @@ https://cloud-guru.github.io/message_queue/
 
 ## Bố cục
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+    INTRODUCTION                      # Giới thiệu vấn đề
+    TECHNICAL RESEARCH                # Các công nghệ nghiên cứu
+    BLUEPRINT                         # Cập nhật quá trình thực hiện
+    ABOUT                             # 
 
 
 
