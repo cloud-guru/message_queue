@@ -1,4 +1,4 @@
-### Tổng quan
+# Tổng quan
 
 ![](images/kafka_atr1.PNG)
 
@@ -8,9 +8,9 @@
   - Consumer kết nối , subscribe các topic lấy messeage về xử lý
 * Zookeeper cung cấp một khung nhìn đồng bộ về cấu hình Kafka Cluster: có các broker nào, broker chứa các partition nào của topic, broker nào làm leader trong các partition topic, topic nào đang tạo, xóa, vị trí hiện tại, replicate, pending..., liên tục gửi các thay đổi cho kafka
 
-### Topic architecture
+# Tổ chức messeage queue
 
-* Mỗi topic như một chủ đề mà producer publish - consumer subscribe . Topic được lưu thành một số một partition lưu vào các broker. Việc chọn cho partition vào broker nào hoàn toàn có thể cấu hình.
+* Messeage tổ chức ra các topic. Mỗi topic như một chủ đề mà producer publish - consumer subscribe . Topic được lưu thành một số  partition lưu vào các broker. Việc chọn cho partition vào broker nào hoàn toàn có thể cấu hình kiểm soát.
 ![](images/kafka_atrtop.png)
 
 * Các message trong mỗi partition được sắp xếp tuần tự (không thay đổi) giống thứ tự đưa lên Kafka cluster của các message. Mỗi message trong một partition được gán cho một định danh thứ tự, được gọi là một offset.
@@ -27,7 +27,7 @@ Theo như hình, topic lưu ra 4 partition. Quá trình viết producer sẽ ph�
 
 ![](images/kafka_atrtop2.png)
 
-### Consumer and Producers architecture
+# Consumer và Producers
 
 Consumer với nhiệm vụ lấy dữ liệu từ kafka, thì có thể tổ chức thành các consumer group. Mục đích: tăng cường tốc độ đọc, failover. Cụ thể: 
 
@@ -62,7 +62,7 @@ Producer với nhiệm vụ đẩy dữ liệu vào kafka. Có một số điể
   - Idempotent : đảm với 1 messeage yêu cầu ghi thì chỉ đúng 1 messeage xuất hiện trong topic
   - Transactional : đảm bảo một nhóm các messeage cùng được gửi với nhau.
  
-## Zookeeper
+# Zookeeper
 ### [Kiến trúc zookeeper](zookeeper_kafka_integration/zookeeper.md) 
 ### [HA với zookeeper](zookeeper_kafka_integration/HA_configuration.md)
 ### Ref

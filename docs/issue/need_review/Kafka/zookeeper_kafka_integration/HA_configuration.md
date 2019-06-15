@@ -1,14 +1,15 @@
-###Nội dung
+#Nội dung
 
-Mục đích bài viết là chỉ ra cách cấu hình một cụm zookeeper 3 node cùng kafka gồm 3 broker có thể failover : 1 kafka, 1 zookeeper hay 1 host chết vẫn có thể hoạt động bình thường;
+Bài viết là chỉ ra cách cấu hình một cụm zookeeper 3 node cùng kafka gồm 3 broker có thể failover : 1 kafka, 1 zookeeper hay 1 host chết vẫn có thể hoạt động bình thường;
 
-### Mô hình 
+# Mô hình 
 
 ![](../images/zoo4.PNG)
 
-### Cài đặt
+# Cài đặt
 
-* **Tạo user , dowload kafka-zookeeper**
+### Chuẩn bị
+Tạo user , dowload kafka-zookeeper:
 
 Tạo user kafka
 ```
@@ -27,11 +28,11 @@ tar -xvzf ~/kafka.tgz --strip 1
 ```
 Các file chạy, cấu hình hiện đã giải nén ra thư mục ~/kafka
 
-* **Thực hiện cấu hình** 
 
-Cấu hình cụm zookeeper: làm trên tất cả các host:
+### Cấu hình cụm zookeeper
+Làm trên tất cả các host:
 
-bước 1:) Sửa file kafka/config/zookeeper.properties thành nội dung:
+<b>Bước 1:</b></br> Sửa file kafka/config/zookeeper.properties thành nội dung:
 
 ```
 initLimit=5
@@ -48,21 +49,22 @@ Trong đó  port 2181 cho client connections; 2888 cho follower connections (n�
 
 Trỏ "dataDir=/home/kafka/Data/zookeeper" thì ta cũng cần tạo một thư mục trống /home/kafka/Data/zookeeper
 
-bước 2:) vào thư mục /home/kafka/Data/zookeeper , tạo file myid, nội dung là zookeeper id ở trên:
+<b>Bước 2:</b></br> vào thư mục /home/kafka/Data/zookeeper , tạo file myid, nội dung là zookeeper id ở trên:
 
 ví dụ với host zookeeper 1 : 192.168.2.194
 
 ```
 echo "1" > /home/kafka/Data/zookeeper/myid
 ```
-Bước 3:) chạy zookeeper trên mỗi host:
+<b>Bước 3:</b></br> chạy zookeeper trên mỗi host:
 
 ```
 /home/kafka/kafka/bin/zookeeper-server-start.sh /home/kafka/kafka/config/zookeeper.properties
 ```
-Cấu hình cụm kafka: làm trên tất cả các host:
+### Cấu hình cụm kafka
+Làm trên tất cả các host:
 
-bước 1:) Sửa file ~/kafka/config/server.properties
+<b> Bước 1:</b></br> Sửa file ~/kafka/config/server.properties
 
 Thay ```broker.id=x```với x là id kafka của từng host, vd host 192.168.2.194 ```broker.id=1```
 
@@ -70,7 +72,7 @@ Liệt kê host trong cụm zookeeper tại ```zookeeper.connect=<host>:port```.
 
 Thêm dòng: ```delete.topic.enable = true``` cho phép kafka broker có thể xóa topic.
 
-bước 2:) chạy kafka:
+<b> Bước 2:</b></br> chạy kafka:
 
 ```
 /bin/sh -c '/home/kafka/kafka/bin/kafka-server-start.sh /home/kafka/kafka/config/server.properties > /home/kafka/kafka/kafka.log 2>&1'
@@ -80,7 +82,7 @@ bước 2:) chạy kafka:
 
 __consumer_offsets là topic được tạo mặc định, rất quan trọng vì nó giữ vị trí offset đang đọc tới của consummer. Tuy nhiên khi mới tạo nó sẽ lấy replicate 1 cùng patition 50. Ta cần tăng số replicate của nó lên. 
 
-bước 1:)Tạo file inc-replication-factor.json với nội dung:
+<b>Bước 1:</b></br>Tạo file inc-replication-factor.json với nội dung:
 
 ```
 {"version":1,
@@ -139,7 +141,7 @@ bước 1:)Tạo file inc-replication-factor.json với nội dung:
 }
 ```
 
-bước 2:) Thực hiện partition reassignment:
+<b>Bước 2:</b></br> Thực hiện partition reassignment:
 
 ```
 ~/kafka/bin/kafka-reassign-partitions.sh --zookeeper 192.168.2.193:2181 \
@@ -147,7 +149,7 @@ bước 2:) Thực hiện partition reassignment:
     --execute
 ```
 
-Kiểm tra kết quả:
+### Kiểm tra kết quả:
 
 ```
 ~/kafka/bin/kafka-topics.sh --zookeeper 192.168.2.193 --describe --topic __consumer_offsets
