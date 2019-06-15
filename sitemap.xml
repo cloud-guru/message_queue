@@ -31,18 +31,13 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc></loc>
-     
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
      <loc>https://cloud-monitor.github.io/message_queue/issue/in_process/</loc>
      <lastmod>2019-06-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc></loc>
-     
+     <loc>https://cloud-monitor.github.io/message_queue/issue/need_review/</loc>
+     <lastmod>2019-06-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
