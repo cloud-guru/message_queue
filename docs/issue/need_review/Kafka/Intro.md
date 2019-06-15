@@ -2,7 +2,7 @@
 * Khái niệm:
 Kafka is a publish-subscribe distributed, partitioned, replicated commit log service. It provides the functionality of a messaging system, but with a unique design.
 
-* Hoạt động cơ bản:
+* Hoạt động cơ bản: <br/>
 ![](../images/kafka_basic.PNG)
 
   - Kafka lưu trữ các message thành các category gọi là topic

@@ -62,8 +62,11 @@ Producer với nhiệm vụ đẩy dữ liệu vào kafka. Có một số điể
   - Idempotent : đảm với 1 messeage yêu cầu ghi thì chỉ đúng 1 messeage xuất hiện trong topic
   - Transactional : đảm bảo một nhóm các messeage cùng được gửi với nhau.
  
-
+## Zookeeper
+### [Kiến trúc zookeeper](zookeeper_kafka_integration/zookeeper.md) 
+### [HA với zookeeper](zookeeper_kafka_integration/HA_configuration.md)
 ### Ref
+
 http://cloudurable.com/blog/kafka-architecture/index.html
 
 https://kafka.apache.org/documentation/

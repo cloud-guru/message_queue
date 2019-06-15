@@ -124,34 +124,7 @@ echo "Hello, World" | ~/kafka/bin/kafka-console-producer.sh --broker-list localh
 
 ### <a name="Cài đặt DrashBoarsh"></a> Cài đặt DrashBoarsh
 
-* Cài sbt
-* 
-```
-echo "deb https://dl.bintray.com/sbt/debian /" | sudo tee -a /etc/apt/sources.list.d/sbt.list
-sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2EE0EA64E40A89B84B2DF73499E82A75642AC823
-sudo apt-get update
-sudo apt-get install sbt
-```
-
-* Build:
-* 
-```
-git clone https://github.com/yahoo/kafka-manager.git
-PATH=/usr/lib/jvm/java-8-openjdk-amd64/bin:$PATH
-JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-cd kafka-manager
-sbt -java-home $JAVA_HOME clean dist
-cp /home/kafka/kafka-manager/target/universal/kafka-manager-1.3.3.21.zip .
-unzip kafka-manager-1.3.3.21.zip
-```
-
-* Run 
-
-```
-bin/kafka-manager -Dconfig.file= conf/application.conf -Dhttp.port=9000
-```
-
-Cách khác , dùng docker:
+Docker:
 
 ```
 docker run -d --net=host --restart unless-stopped --name kafka_manager -e ZK_HOSTS="localhost:2181" -e APPLICATION_SECRET=letmein sheepkiller/kafka-manager
@@ -161,3 +134,4 @@ Một web-controll sẽ được mở ra tại cổng 9000
 <br/>
 ![](../images/kakfa_drash.PNG)
 <br/>
+

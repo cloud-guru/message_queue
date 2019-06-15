@@ -59,13 +59,13 @@ Add the following property to `config/consumer.properties`:
 
 basic command cli zookeeper : http://www.corejavaguru.com/bigdata/zookeeper/cli
 
-
 ## Reassign partition to broker
 
-Sử dụng kafka-reassign-partitions.sh tool với 3 tùy chọn
- * --generate: Đưa vào list topic cần chuyển paritition, trả về danh sách gợi ý (plan) nên đưa partition nào vào broker nào
- * --execute:  Thực hiện reassignment dưa trên plan
- * --verify:   Đưa vào plan, check xem quá trình reassign đã thành công hay thất bại thế nào
+Sử dụng kafka-reassign-partitions.sh tool với 3 tùy chọn:
+
+* generate: Đưa vào list topic cần chuyển paritition, trả về danh sách gợi ý (plan) nên đưa partition nào vào broker nào
+* execute:  Thực hiện reassignment dưa trên plan
+* verify:   Đưa vào plan, check xem quá trình reassign đã thành công hay thất bại thế nào
 
 Bước 1: Tạo danh sách topic:
 
