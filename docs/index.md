@@ -1,13 +1,26 @@
-# Welcome to MkDocs
+# Chào mừng 
+Chào mừng đến với các nghiên cứu liên quan đến messeage queue
 
-For full documentation visit [mkdocs.org](https://mkdocs.org).
+Xem online tại:
+https://cloud-guru.github.io/messeage_queue
 
-## Commands
+## Commands 
+Clone project: 
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs help` - Print this help message.
+* `git clone https://github.com/cloud-guru/message_queue.git`
+
+Install mkdocs:
+
+* `pip install mkdocs`
+
+Triển khai:
+
+Clone và di chuyển vào project:
+
+* `mkdocs gh-deploy` - deploy vào github . để có thể xem online (chỉ có user thuộc cloud-guru mới có thể làm)
+* `mkdocs serve -a 0.0.0.0:8000 ` - Phục vụ xem local tại cổng 8000
+* `mkdocs help` - Print  help.
+xem thêm tại https://mkdocs.org
 
 ## Project layout
 
