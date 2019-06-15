@@ -91,7 +91,7 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../../propose/README.md">Propose</a>
+    <a class="" href="../../../propose/">Propose</a>
                 </li>
                 <li class="">
                     
@@ -99,7 +99,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../../../in_process/README.md">In process</a>
+    <a class="" href="../../../in_process/">In process</a>
                 </li>
                 <li class="">
                     
@@ -107,7 +107,7 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../../../solved/README.md">Sloved</a>
+    <a class="" href="../../../solved/">Sloved</a>
                 </li>
     </ul>
 	    </li>
@@ -118,15 +118,15 @@
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../../../about/release-notes.md">Release Notes</a>
+    <a class="" href="../../../../about/release-notes/">Release Notes</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../../../about/contributing.md">Contributing</a>
+    <a class="" href="../../../../about/contributing/">Contributing</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../../../about/license.md">License</a>
+    <a class="" href="../../../../about/license/">License</a>
                 </li>
     </ul>
 	    </li>
@@ -202,10 +202,12 @@
 <p><code>bin/zookeeper-shell.sh localhost:2181</code></p>
 <p>basic command cli zookeeper : http://www.corejavaguru.com/bigdata/zookeeper/cli</p>
 <h2 id="reassign-partition-to-broker">Reassign partition to broker<a class="headerlink" href="#reassign-partition-to-broker" title="Permanent link">&para;</a></h2>
-<p>Sử dụng kafka-reassign-partitions.sh tool với 3 tùy chọn
- * &ndash;generate: Đưa vào list topic cần chuyển paritition, trả về danh sách gợi ý (plan) nên đưa partition nào vào broker nào
- * &ndash;execute:  Thực hiện reassignment dưa trên plan
- * &ndash;verify:   Đưa vào plan, check xem quá trình reassign đã thành công hay thất bại thế nào</p>
+<p>Sử dụng kafka-reassign-partitions.sh tool với 3 tùy chọn:</p>
+<ul>
+<li>generate: Đưa vào list topic cần chuyển paritition, trả về danh sách gợi ý (plan) nên đưa partition nào vào broker nào</li>
+<li>execute:  Thực hiện reassignment dưa trên plan</li>
+<li>verify:   Đưa vào plan, check xem quá trình reassign đã thành công hay thất bại thế nào</li>
+</ul>
 <p>Bước 1: Tạo danh sách topic:</p>
 <pre><code>cat topics-to-move.json
 {&quot;topics&quot;: [{&quot;topic&quot;: &quot;foo1&quot;},

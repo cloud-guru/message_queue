@@ -26,8 +26,8 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc></loc>
-     
+     <loc>https://cloud-monitor.github.io/message_queue/issue/propose/</loc>
+     <lastmod>2019-06-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
@@ -36,8 +36,8 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc></loc>
-     
+     <loc>https://cloud-monitor.github.io/message_queue/issue/in_process/</loc>
+     <lastmod>2019-06-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
@@ -46,23 +46,23 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc></loc>
-     
+     <loc>https://cloud-monitor.github.io/message_queue/issue/solved/</loc>
+     <lastmod>2019-06-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc></loc>
-     
+     <loc>https://cloud-monitor.github.io/message_queue/about/release-notes/</loc>
+     <lastmod>2019-06-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc></loc>
-     
+     <loc>https://cloud-monitor.github.io/message_queue/about/contributing/</loc>
+     <lastmod>2019-06-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc></loc>
-     
+     <loc>https://cloud-monitor.github.io/message_queue/about/license/</loc>
+     <lastmod>2019-06-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>
