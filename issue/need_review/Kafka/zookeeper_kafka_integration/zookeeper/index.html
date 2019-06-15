@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Hoa Ngo">
+  <link rel="shortcut icon" href="../../../../../img/favicon.ico">
+  <title>Zookeeper - messeage queue</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../../../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Zookeeper";
+    var mkdocs_page_input_path = "issue/need_review/Kafka/zookeeper_kafka_integration/zookeeper.md";
+    var mkdocs_page_url = "/message_queue/issue/need_review/Kafka/zookeeper_kafka_integration/zookeeper/";
+  </script>
+  
+  <script src="../../../../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../../../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/django.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../../../../.." class="icon icon-home"> messeage queue</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../../../..">Index</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">INTRODUCTION</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../../../">Issue describe</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">TECHNICAL RESEARCH</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../">Kafka</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../Rabbit/">Rabbit_mq</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../Qdr/">Qpid_dispatch_route</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">BLUEPRINT</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../../../propose/README.md">Propose</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../../start/README.md">Start</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../../in_process/README.md">In process</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../README.md">Need review</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../../solved/README.md">Sloved</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">ABOUT</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../../../../about/release-notes.md">Release Notes</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../../../about/contributing.md">Contributing</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../../../about/license.md">License</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../../..">messeage queue</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Zookeeper</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h3 id="tong-quan">Tổng quan:<a class="headerlink" href="#tong-quan" title="Permanent link">&para;</a></h3>
+<p>Zookeeper là một dịch vụ dùng đến khi muốn duy trì sự thống nhất thông tin của các service chạy cluster: distributed configuration management , consensus building through coordination and locks. </p>
+<p>Zookeeper luôn cài kèm khi ta cài Kafka, giúp các kafka-broker đạt được sự đồng thuận về các thông tin như: số lượng, id, địa chỉ của các broker; mỗi topic có bao nhiêu partition, mỗi partition nằm tại broker nào; khi có reassigne, rebalance topic sẽ thống nhất chuyển patition về đâu, và một số thông tin phụ khác</p>
+<p>(Trong stream4flow, zookeeper cũng chỉ có vai trò giúp kafka trong đạt đồng thuận)</p>
+<p>Như vậy về cơ bản , ý nghĩa của zookeeper cũng giống etcd : lưu các thông tin của cluster, thông báo khi có thay đổi. Một so sánh 2 service: https://stackshare.io/stackups/etcd-vs-zookeeper</p>
+<p>Các thao tác vận hành zookeeper chỉ xoay quanh thêm, sửa xóa dữ liệu lưu trên zookeeper.</p>
+<h3 id="to-chuc-du-lieu-trong-zookeeper">Tổ chức dữ liệu trong zookeeper:<a class="headerlink" href="#to-chuc-du-lieu-trong-zookeeper" title="Permanent link">&para;</a></h3>
+<p>Dữ liệu trong zookeeper tổ chức như dạng cây, cây thư mục: </p>
+<p><img alt="" src="../../images/zoo.PNG" /></p>
+<ul>
+<li>Mỗi node trong cây gọi là zNode</li>
+<li>Mỗi zNode được định danh bởi path đến node. ví dụ ở hình có 4 Znode: /; /Zoo; /Zoo/lion; /Zoo/tiger</li>
+<li>Mỗi zNode có thể ghi một data (string, byte) </li>
+<li>Mỗi zNode có thể có các Znode con</li>
+<li>Ta có thể thêm sửa xóa zNode cũng như data trên node, add node con, tuy nhiên không thể rename node</li>
+</ul>
+<h3 id="thuc-hanh">Thực hành :<a class="headerlink" href="#thuc-hanh" title="Permanent link">&para;</a></h3>
+<p>Sau khi cài kafka, thường ta đã có zookeeper chạy kèm, cổng 2181</p>
+<p>a) thao tác với console:</p>
+<p>Vào thư mục cài kafka ( ~/kafka), mở zookeeper console với:</p>
+<pre><code>bin/zookeeper-shell.sh localhost:2181
+
+Connecting to localhost:2181
+Welcome to ZooKeeper!
+JLine support is disabled
+
+WATCHER::
+
+WatchedEvent state:SyncConnected type:None path:null
+
+</code></pre>
+
+<ul>
+<li>Xem các một node bất kỳ: lệnh ls</li>
+</ul>
+<pre><code>ls /
+[cluster, controller, brokers, zookeeper, foo, admin, isr_change_notification, log_dir_event_notification, controller_epoch, kafka-manager, consumers, latest_producer_id_block, config]
+ls /brokers
+[ids, topics, seqid]
+
+</code></pre>
+
+<ul>
+<li>Thêm một znode zk_test với data &ldquo;test&rdquo;</li>
+</ul>
+<pre><code>create /zk_test my_data
+Created /zk_test
+
+</code></pre>
+
+<ul>
+<li>xem data node /zk_test :</li>
+</ul>
+<pre><code>get /zk_test
+my_data
+...
+
+</code></pre>
+
+<ul>
+<li>thêm con child1 vào /zk_test :</li>
+</ul>
+<pre><code>create /zk_test/Child1 &quot;firstchild&quot;
+Created /zk_test/Child1
+</code></pre>
+
+<p>Các thao các cơ bản xem thêm tại: http://www.corejavaguru.com/bigdata/zookeeper/cli</p>
+<p>b) Sử dụng drashboard:</p>
+<p>Để thuận thiện nhanh chóng ta có thể dùng drashboard:</p>
+<pre><code>docker run -d \
+  -p 8080:8080 \
+  -e ZK_DEFAULT_NODE=localhost:2181/ \
+  -e USER=zookeeper \
+  -e PASSWORD=zookeeper \
+  --name zk-web \
+  -t tobilg/zookeeper-webui
+</code></pre>
+
+<p>Ta sẽ tạo ra 1 web-UI lắng nghe cổng 8080. user:password zookeeper:zookeeper</p>
+<p><img alt="" src="../../images/zooweb.PNG" /></p>
+<p>Chọn vào host zookeeper : vd 192.168.2.194:2181 ( dùng localhost:2181 có thể lỗi do container không phân giải localhost là gì được). Ta có danh sách các Node nối với root
+<img alt="" src="../../images/zooweb1.PNG" /></p>
+<p>CLick vào từng node để xem tiếp theo. Thêm sửa xóa ở gần chỗ footer của website.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/cloud-guru/message_queue" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+      
+    </span>
+</div>
+    <script>var base_url = '../../../../..';</script>
+    <script src="../../../../../js/theme.js" defer></script>
+      <script src="../../../../../search/main.js" defer></script>
+
+</body>
+</html>

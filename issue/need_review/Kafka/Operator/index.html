@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Hoa Ngo">
+  <link rel="shortcut icon" href="../../../../img/favicon.ico">
+  <title>Operator - messeage queue</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Operator";
+    var mkdocs_page_input_path = "issue/need_review/Kafka/Operator.md";
+    var mkdocs_page_url = "/message_queue/issue/need_review/Kafka/Operator/";
+  </script>
+  
+  <script src="../../../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/django.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../../../.." class="icon icon-home"> messeage queue</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../../..">Index</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">INTRODUCTION</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../../">Issue describe</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">TECHNICAL RESEARCH</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../">Kafka</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Rabbit/">Rabbit_mq</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Qdr/">Qpid_dispatch_route</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">BLUEPRINT</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../../propose/README.md">Propose</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../start/README.md">Start</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../in_process/README.md">In process</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../README.md">Need review</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../solved/README.md">Sloved</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">ABOUT</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../../../about/release-notes.md">Release Notes</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../../about/contributing.md">Contributing</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../../about/license.md">License</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../..">messeage queue</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Operator</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="operator-with-kafka-topics">Operator with kafka Topics<a class="headerlink" href="#operator-with-kafka-topics" title="Permanent link">&para;</a></h2>
+<h3 id="list-existing-topics">List existing topics<a class="headerlink" href="#list-existing-topics" title="Permanent link">&para;</a></h3>
+<p><code>bin/kafka-topics.sh --zookeeper localhost:2181 --list</code></p>
+<h3 id="describe-a-topic">Describe a topic<a class="headerlink" href="#describe-a-topic" title="Permanent link">&para;</a></h3>
+<p><code>bin/kafka-topics.sh --zookeeper localhost:2181 --describe --topic mytopic</code></p>
+<h3 id="purge-a-topic">Purge a topic<a class="headerlink" href="#purge-a-topic" title="Permanent link">&para;</a></h3>
+<p><code>bin/kafka-topics.sh --zookeeper localhost:2181 --alter --topic mytopic --config retention.ms=1000</code></p>
+<p>&hellip; wait a minute &hellip;</p>
+<p><code>bin/kafka-topics.sh --zookeeper localhost:2181 --alter --topic mytopic --delete-config retention.ms</code></p>
+<h3 id="delete-a-topic">Delete a topic<a class="headerlink" href="#delete-a-topic" title="Permanent link">&para;</a></h3>
+<p><code>bin/kafka-topics.sh --zookeeper localhost:2181 --delete --topic mytopic</code></p>
+<h3 id="get-number-of-messages-in-a-topic">Get number of messages in a topic<a class="headerlink" href="#get-number-of-messages-in-a-topic" title="Permanent link">&para;</a></h3>
+<p><code>bin/kafka-run-class.sh kafka.tools.GetOffsetShell --broker-list localhost:9092 --topic mytopic --time -1 --offsets 1 | awk -F  ":" '{sum += $3} END {print sum}'</code></p>
+<h3 id="get-the-earliest-offset-still-in-a-topic">Get the earliest offset still in a topic<a class="headerlink" href="#get-the-earliest-offset-still-in-a-topic" title="Permanent link">&para;</a></h3>
+<p><code>bin/kafka-run-class.sh kafka.tools.GetOffsetShell --broker-list localhost:9092 --topic mytopic --time -2</code></p>
+<h3 id="get-the-latest-offset-still-in-a-topic">Get the latest offset still in a topic<a class="headerlink" href="#get-the-latest-offset-still-in-a-topic" title="Permanent link">&para;</a></h3>
+<p><code>bin/kafka-run-class.sh kafka.tools.GetOffsetShell --broker-list localhost:9092 --topic mytopic --time -1</code></p>
+<h3 id="consume-messages-with-the-console-consumer">Consume messages with the console consumer<a class="headerlink" href="#consume-messages-with-the-console-consumer" title="Permanent link">&para;</a></h3>
+<p><code>bin/kafka-console-consumer.sh --new-consumer --bootstrap-server localhost:9092 --topic mytopic --from-beginning</code></p>
+<h2 id="get-the-consumer-offsets-for-a-topic">Get the consumer offsets for a topic<a class="headerlink" href="#get-the-consumer-offsets-for-a-topic" title="Permanent link">&para;</a></h2>
+<p><code>bin/kafka-consumer-offset-checker.sh --zookeeper=localhost:2181 --topic=mytopic --group=my_consumer_group</code></p>
+<h3 id="read-from-__consumer_offsets">Read from __consumer_offsets<a class="headerlink" href="#read-from-__consumer_offsets" title="Permanent link">&para;</a></h3>
+<p>Add the following property to <code>config/consumer.properties</code>:
+<code>exclude.internal.topics=false</code></p>
+<p><code>bin/kafka-console-consumer.sh --consumer.config config/consumer.properties --from-beginning --topic __consumer_offsets --zookeeper localhost:2181 --formatter "kafka.coordinator.GroupMetadataManager\$OffsetsMessageFormatter"</code></p>
+<h2 id="kafka-consumer-groups">Kafka Consumer Groups<a class="headerlink" href="#kafka-consumer-groups" title="Permanent link">&para;</a></h2>
+<h3 id="list-the-consumer-groups-known-to-kafka">List the consumer groups known to Kafka<a class="headerlink" href="#list-the-consumer-groups-known-to-kafka" title="Permanent link">&para;</a></h3>
+<p><code>bin/kafka-consumer-groups.sh --zookeeper localhost:2181 --list</code>  (old api)</p>
+<p><code>bin/kafka-consumer-groups.sh --new-consumer --bootstrap-server localhost:9092 --list</code> (new api)</p>
+<h3 id="view-the-details-of-a-consumer-group">View the details of a consumer group<a class="headerlink" href="#view-the-details-of-a-consumer-group" title="Permanent link">&para;</a></h3>
+<p><code>bin/kafka-consumer-groups.sh --zookeeper localhost:2181 --describe --group &lt;group name&gt;</code></p>
+<h2 id="kafkacat">kafkacat<a class="headerlink" href="#kafkacat" title="Permanent link">&para;</a></h2>
+<h3 id="getting-the-last-five-message-of-a-topic">Getting the last five message of a topic<a class="headerlink" href="#getting-the-last-five-message-of-a-topic" title="Permanent link">&para;</a></h3>
+<p><code>kafkacat -C -b localhost:9092 -t mytopic -p 0 -o -5 -e</code></p>
+<h2 id="zookeeper">Zookeeper<a class="headerlink" href="#zookeeper" title="Permanent link">&para;</a></h2>
+<h3 id="starting-the-zookeeper-shell">Starting the Zookeeper Shell<a class="headerlink" href="#starting-the-zookeeper-shell" title="Permanent link">&para;</a></h3>
+<p><code>bin/zookeeper-shell.sh localhost:2181</code></p>
+<p>basic command cli zookeeper : http://www.corejavaguru.com/bigdata/zookeeper/cli</p>
+<h2 id="reassign-partition-to-broker">Reassign partition to broker<a class="headerlink" href="#reassign-partition-to-broker" title="Permanent link">&para;</a></h2>
+<p>Sử dụng kafka-reassign-partitions.sh tool với 3 tùy chọn
+ * &ndash;generate: Đưa vào list topic cần chuyển paritition, trả về danh sách gợi ý (plan) nên đưa partition nào vào broker nào
+ * &ndash;execute:  Thực hiện reassignment dưa trên plan
+ * &ndash;verify:   Đưa vào plan, check xem quá trình reassign đã thành công hay thất bại thế nào</p>
+<p>Bước 1: Tạo danh sách topic:</p>
+<pre><code>cat topics-to-move.json
+{&quot;topics&quot;: [{&quot;topic&quot;: &quot;foo1&quot;},
+            {&quot;topic&quot;: &quot;foo2&quot;}],
+&quot;version&quot;:1
+}
+</code></pre>
+
+<p>Bước 2: tạo plan:</p>
+<pre><code>bin/kafka-reassign-partitions.sh --zookeeper localhost:2181 --topics-to-move-json-file topics-to-move.json --broker-list &quot;5,6&quot; --generate
+Current partition replica assignment
+
+{&quot;version&quot;:1,
+&quot;partitions&quot;:[{&quot;topic&quot;:&quot;foo1&quot;,&quot;partition&quot;:2,&quot;replicas&quot;:[1,2]},
+              {&quot;topic&quot;:&quot;foo1&quot;,&quot;partition&quot;:0,&quot;replicas&quot;:[3,4]},
+              {&quot;topic&quot;:&quot;foo2&quot;,&quot;partition&quot;:2,&quot;replicas&quot;:[1,2]},
+              {&quot;topic&quot;:&quot;foo2&quot;,&quot;partition&quot;:0,&quot;replicas&quot;:[3,4]},
+              {&quot;topic&quot;:&quot;foo1&quot;,&quot;partition&quot;:1,&quot;replicas&quot;:[2,3]},
+              {&quot;topic&quot;:&quot;foo2&quot;,&quot;partition&quot;:1,&quot;replicas&quot;:[2,3]}]
+}
+
+Proposed partition reassignment configuration
+
+{&quot;version&quot;:1,
+&quot;partitions&quot;:[{&quot;topic&quot;:&quot;foo1&quot;,&quot;partition&quot;:2,&quot;replicas&quot;:[5,6]},
+              {&quot;topic&quot;:&quot;foo1&quot;,&quot;partition&quot;:0,&quot;replicas&quot;:[5,6]},
+              {&quot;topic&quot;:&quot;foo2&quot;,&quot;partition&quot;:2,&quot;replicas&quot;:[5,6]},
+              {&quot;topic&quot;:&quot;foo2&quot;,&quot;partition&quot;:0,&quot;replicas&quot;:[5,6]},
+              {&quot;topic&quot;:&quot;foo1&quot;,&quot;partition&quot;:1,&quot;replicas&quot;:[5,6]},
+              {&quot;topic&quot;:&quot;foo2&quot;,&quot;partition&quot;:1,&quot;replicas&quot;:[5,6]}]
+}
+</code></pre>
+
+<p>Lưu thông tin từ sau dòng <code>Proposed...</code> vào file  expand-cluster-reassignment.json</p>
+<p>Bước 3: Thực hiện:</p>
+<pre><code>bin/kafka-reassign-partitions.sh --zookeeper localhost:2181 --reassignment-json-file expand-cluster-reassignment.json --execute
+</code></pre>
+
+<p>Bước 4: kiểm tra:</p>
+<pre><code>bin/kafka-reassign-partitions.sh --zookeeper localhost:2181 --reassignment-json-file expand-cluster-reassignment.json --verify
+Status of partition reassignment:
+Reassignment of partition [foo1,0] completed successfully
+Reassignment of partition [foo1,1] is in progress
+Reassignment of partition [foo1,2] is in progress
+Reassignment of partition [foo2,0] completed successfully
+Reassignment of partition [foo2,1] completed successfully
+Reassignment of partition [foo2,2] completed successfully
+</code></pre>
+
+<p>Tương tự, thao tác tăng số replicate của một topic cũng làm như các bước trên.</p>
+<pre><code>cat increase-replication-factor.json
+{&quot;version&quot;:1,
+&quot;partitions&quot;:[{&quot;topic&quot;:&quot;foo&quot;,&quot;partition&quot;:0,&quot;replicas&quot;:[5,6,7]}]}
+
+bin/kafka-reassign-partitions.sh --zookeeper localhost:2181 --reassignment-json-file increase-replication-factor.json --execute
+
+Current partition replica assignment
+{&quot;version&quot;:1,
+&quot;partitions&quot;:[{&quot;topic&quot;:&quot;foo&quot;,&quot;partition&quot;:0,&quot;replicas&quot;:[5]}]}
+
+Save this to use as the --reassignment-json-file option during rollback
+Successfully started reassignment of partitions
+{&quot;version&quot;:1,
+&quot;partitions&quot;:[{&quot;topic&quot;:&quot;foo&quot;,&quot;partition&quot;:0,&quot;replicas&quot;:[5,6,7]}]}
+</code></pre>
+
+<h2 id="ref">Ref<a class="headerlink" href="#ref" title="Permanent link">&para;</a></h2>
+<p>https://www.ibm.com/support/knowledgecenter/en/SSCVHB_1.2.0/admin/tnpi_reassign_partitions.html</p>
+<p>https://blog.imaginea.com/how-to-rebalance-topics-in-kafka-cluster/</p>
+<p>https://cwiki.apache.org/confluence/display/KAFKA/Replication+tools</p>
+<p>https://kafka.apache.org/documentation/#basic_ops</p>
+<p>https://gist.github.com/sonhmai/5b2b4455162c808c091b661aeb675625</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/cloud-guru/message_queue" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+      
+    </span>
+</div>
+    <script>var base_url = '../../../..';</script>
+    <script src="../../../../js/theme.js" defer></script>
+      <script src="../../../../search/main.js" defer></script>
+
+</body>
+</html>

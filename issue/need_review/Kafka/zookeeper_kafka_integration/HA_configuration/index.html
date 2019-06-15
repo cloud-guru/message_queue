@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Hoa Ngo">
+  <link rel="shortcut icon" href="../../../../../img/favicon.ico">
+  <title>HA configuration - messeage queue</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../../../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "HA configuration";
+    var mkdocs_page_input_path = "issue/need_review/Kafka/zookeeper_kafka_integration/HA_configuration.md";
+    var mkdocs_page_url = "/message_queue/issue/need_review/Kafka/zookeeper_kafka_integration/HA_configuration/";
+  </script>
+  
+  <script src="../../../../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../../../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/django.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../../../../.." class="icon icon-home"> messeage queue</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../../../..">Index</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">INTRODUCTION</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../../../">Issue describe</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">TECHNICAL RESEARCH</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../">Kafka</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../Rabbit/">Rabbit_mq</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../Qdr/">Qpid_dispatch_route</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">BLUEPRINT</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../../../propose/README.md">Propose</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../../start/README.md">Start</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../../in_process/README.md">In process</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../README.md">Need review</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../../solved/README.md">Sloved</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">ABOUT</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../../../../about/release-notes.md">Release Notes</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../../../about/contributing.md">Contributing</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../../../about/license.md">License</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../../..">messeage queue</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>HA configuration</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h3 id="noi-dung">Nội dung<a class="headerlink" href="#noi-dung" title="Permanent link">&para;</a></h3>
+<p>Mục đích bài viết là chỉ ra cách cấu hình một cụm zookeeper 3 node cùng kafka gồm 3 broker có thể failover : 1 kafka, 1 zookeeper hay 1 host chết vẫn có thể hoạt động bình thường;</p>
+<h3 id="mo-hinh">Mô hình<a class="headerlink" href="#mo-hinh" title="Permanent link">&para;</a></h3>
+<p><img alt="" src="../../images/zoo4.PNG" /></p>
+<h3 id="cai-at">Cài đặt<a class="headerlink" href="#cai-at" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Tạo user , dowload kafka-zookeeper</strong></li>
+</ul>
+<p>Tạo user kafka</p>
+<pre><code>sudo useradd kafka -m
+sudo passwd kafka
+sudo adduser kafka sudo
+su -l kafka
+</code></pre>
+
+<p>Dowload kafka, kafka cũng đã có sẵn bản zookeeper kèm theo.</p>
+<pre><code>curl &quot;http://www-eu.apache.org/dist/kafka/1.1.0/kafka_2.12-1.1.0.tgz&quot; -o ~/kafka.tgz
+mkdir ~/kafka &amp;&amp; cd ~/kafka
+tar -xvzf ~/kafka.tgz --strip 1
+</code></pre>
+
+<p>Các file chạy, cấu hình hiện đã giải nén ra thư mục ~/kafka</p>
+<ul>
+<li><strong>Thực hiện cấu hình</strong> </li>
+</ul>
+<p>Cấu hình cụm zookeeper: làm trên tất cả các host:</p>
+<p>bước 1:) Sửa file kafka/config/zookeeper.properties thành nội dung:</p>
+<pre><code>initLimit=5
+syncLimit=2
+dataDir=/home/kafka/Data/zookeeper
+clientPort=2181
+server.1=192.168.2.194:2888:3888
+server.2=192.168.2.153:2888:3888
+server.3=192.168.2.193:2888:3888
+</code></pre>
+
+<p>Trong đó  port 2181 cho client connections; 2888 cho follower connections (nếu nó là zookeeper leader); and 3888 cho các server khác kết nối khi quá trình bầu leader đang diễn ra.</p>
+<p>&ldquo;server.1=192.168.2.194&rdquo; tức ta đã khai báo zookeeper id cho host 192.168.2.194 là id 1</p>
+<p>Trỏ &ldquo;dataDir=/home/kafka/Data/zookeeper&rdquo; thì ta cũng cần tạo một thư mục trống /home/kafka/Data/zookeeper</p>
+<p>bước 2:) vào thư mục /home/kafka/Data/zookeeper , tạo file myid, nội dung là zookeeper id ở trên:</p>
+<p>ví dụ với host zookeeper 1 : 192.168.2.194</p>
+<pre><code>echo &quot;1&quot; &gt; /home/kafka/Data/zookeeper/myid
+</code></pre>
+
+<p>Bước 3:) chạy zookeeper trên mỗi host:</p>
+<pre><code>/home/kafka/kafka/bin/zookeeper-server-start.sh /home/kafka/kafka/config/zookeeper.properties
+</code></pre>
+
+<p>Cấu hình cụm kafka: làm trên tất cả các host:</p>
+<p>bước 1:) Sửa file ~/kafka/config/server.properties</p>
+<p>Thay <code>broker.id=x</code>với x là id kafka của từng host, vd host 192.168.2.194 <code>broker.id=1</code></p>
+<p>Liệt kê host trong cụm zookeeper tại <code>zookeeper.connect=&lt;host&gt;:port</code>. ví dụ với cụm trên <code>zookeeper.connect=192.168.2.194:2181,192.168.2.193:2181,192.168.2.53:2181</code></p>
+<p>Thêm dòng: <code>delete.topic.enable = true</code> cho phép kafka broker có thể xóa topic.</p>
+<p>bước 2:) chạy kafka:</p>
+<pre><code>/bin/sh -c '/home/kafka/kafka/bin/kafka-server-start.sh /home/kafka/kafka/config/server.properties &gt; /home/kafka/kafka/kafka.log 2&gt;&amp;1'
+</code></pre>
+
+<ul>
+<li><strong>Tạo replicate cho topic __consumer_offsets</strong></li>
+</ul>
+<p>__consumer_offsets là topic được tạo mặc định, rất quan trọng vì nó giữ vị trí offset đang đọc tới của consummer. Tuy nhiên khi mới tạo nó sẽ lấy replicate 1 cùng patition 50. Ta cần tăng số replicate của nó lên. </p>
+<p>bước 1:)Tạo file inc-replication-factor.json với nội dung:</p>
+<pre><code>{&quot;version&quot;:1,
+ &quot;partitions&quot;:[
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:0,  &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:1,  &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:2,  &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:3,  &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:4,  &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:5,  &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:6,  &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:7,  &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:8,  &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:9,  &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:10, &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:11, &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:12, &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:13, &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:14, &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:15, &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:16, &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:17, &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:18, &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:19, &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:20, &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:21, &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:22, &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:23, &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:24, &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:25, &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:26, &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:27, &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:28, &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:29, &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:30, &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:31, &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:32, &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:33, &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:34, &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:35, &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:36, &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:37, &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:38, &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:39, &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:40, &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:41, &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:42, &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:43, &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:44, &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:45, &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:46, &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:47, &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:48, &quot;replicas&quot;:[1, 2, 3]},
+   {&quot;topic&quot;:&quot;__consumer_offsets&quot;, &quot;partition&quot;:49, &quot;replicas&quot;:[1, 2, 3]}
+ ]
+}
+</code></pre>
+
+<p>bước 2:) Thực hiện partition reassignment:</p>
+<pre><code>~/kafka/bin/kafka-reassign-partitions.sh --zookeeper 192.168.2.193:2181 \
+    --reassignment-json-file /home/kafka/inc-replication-factor.json  \
+    --execute
+</code></pre>
+
+<p>Kiểm tra kết quả:</p>
+<pre><code>~/kafka/bin/kafka-topics.sh --zookeeper 192.168.2.193 --describe --topic __consumer_offsets
+</code></pre>
+
+<p>Như vậy, hiện giờ nếu tạo topic , ta nên để replicate 3 giúp failover: </p>
+<pre><code>~/kafka/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 1 --topic rep3
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/cloud-guru/message_queue" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+      
+    </span>
+</div>
+    <script>var base_url = '../../../../..';</script>
+    <script src="../../../../../js/theme.js" defer></script>
+      <script src="../../../../../search/main.js" defer></script>
+
+</body>
+</html>

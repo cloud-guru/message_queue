@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Hoa Ngo">
+  <link rel="shortcut icon" href="../../../../img/favicon.ico">
+  <title>Architecture - messeage queue</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Architecture";
+    var mkdocs_page_input_path = "issue/need_review/Kafka/Architecture.md";
+    var mkdocs_page_url = "/message_queue/issue/need_review/Kafka/Architecture/";
+  </script>
+  
+  <script src="../../../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/django.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../../../.." class="icon icon-home"> messeage queue</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../../../..">Index</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">INTRODUCTION</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../../">Issue describe</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">TECHNICAL RESEARCH</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../">Kafka</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Rabbit/">Rabbit_mq</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Qdr/">Qpid_dispatch_route</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">BLUEPRINT</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../../propose/README.md">Propose</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../start/README.md">Start</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../in_process/README.md">In process</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../README.md">Need review</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../solved/README.md">Sloved</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">ABOUT</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../../../about/release-notes.md">Release Notes</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../../about/contributing.md">Contributing</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../../about/license.md">License</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../..">messeage queue</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Architecture</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h3 id="tong-quan">Tổng quan<a class="headerlink" href="#tong-quan" title="Permanent link">&para;</a></h3>
+<p><img alt="" src="../images/kafka_atr1.PNG" /></p>
+<ul>
+<li>Thành phần core của kiến trúc kafka là cụm các broker, có nhiệm vụ nhận về các messeage, phân chia logic topic, lưu trữ trên đĩa, nhân bản và phục hồi dữ liệu giữa các node, trả dữ liệu cho consumer khi yêu cầu</li>
+<li>Producer , Consumer là các node chạy các application sử dụng các API kafka,</li>
+<li>Producer đưa dữ liệu nó thu thập được vào hệ thống messeage</li>
+<li>Consumer kết nối , subscribe các topic lấy messeage về xử lý</li>
+<li>Zookeeper cung cấp một khung nhìn đồng bộ về cấu hình Kafka Cluster: có các broker nào, broker chứa các partition nào của topic, broker nào làm leader trong các partition topic, topic nào đang tạo, xóa, vị trí hiện tại, replicate, pending&hellip;, liên tục gửi các thay đổi cho kafka</li>
+</ul>
+<h3 id="topic-architecture">Topic architecture<a class="headerlink" href="#topic-architecture" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>Mỗi topic như một chủ đề mà producer publish - consumer subscribe . Topic được lưu thành một số một partition lưu vào các broker. Việc chọn cho partition vào broker nào hoàn toàn có thể cấu hình.
+<img alt="" src="../images/kafka_atrtop.png" /></p>
+</li>
+<li>
+<p>Các message trong mỗi partition được sắp xếp tuần tự (không thay đổi) giống thứ tự đưa lên Kafka cluster của các message. Mỗi message trong một partition được gán cho một định danh thứ tự, được gọi là một offset.</p>
+</li>
+</ul>
+<p>Theo như hình, topic lưu ra 4 partition. Quá trình viết producer sẽ phải chỉ ra muốn ghi vào partition nào (mặc định sẽ chọn theo round robin) . Quá trình ghi consummer sẽ phải chỉ ra muốn lấy từ patition và offset nào (mặc định sẽ lấy từ tất cả part, offset mới nhất).</p>
+<ul>
+<li>Với mỗi partition, tùy thuộc vào cấu hình sẽ có một số bản sao chép nhất định để đảm bảo dữ liệu không bị mất khi một node trong cụm bị hỏng.Mỗi broker lưu một bản sao ,chỉ số replicate không được vượt quá số lượng broker trong cụm. Bản chính của partition gọi là  “leader”. Khi ghi, các bản sao chép từ bản leader chứ không nhận dữ liệu trực tiếp từ producer ; các bản sao cũng không đọc song song bởi consumer, không có vai trò trong việc tối ưu đọc và ghi.</li>
+</ul>
+<p><img alt="" src="../images/kafka_atrtop1.png" /></p>
+<ul>
+<li>
+<p>Trên đĩa của các node broker, topic được lưu mức thấp thành các thư mục, file ( gọi là logs). Theo defaut thư mục lưu sẽ là <code>/tmp/kafka-logs/</code> . Trong thư mục, mỗi topic-patition sẽ thành một thư mục con, các message lưu trong các file log thuộc thư mục này.</p>
+</li>
+<li>
+<p>Mặc định các logs lưu trong vòng 7 ngày (với restart thì thư mục /tmp/ sẽ mất nên cần chú ý cấu hình lại)</p>
+</li>
+</ul>
+<p><img alt="" src="../images/kafka_atrtop2.png" /></p>
+<h3 id="consumer-and-producers-architecture">Consumer and Producers architecture<a class="headerlink" href="#consumer-and-producers-architecture" title="Permanent link">&para;</a></h3>
+<p>Consumer với nhiệm vụ lấy dữ liệu từ kafka, thì có thể tổ chức thành các consumer group. Mục đích: tăng cường tốc độ đọc, failover. Cụ thể: </p>
+<ul>
+<li>Kafka quy định: bất kỳ lúc nào, mỗi partition chỉ được 1 consumer trong mỗi consumer group đọc. 
+<br/>ví dụ: ở hình dưới, topic 1 nhận vào 4 messeage (m0, m1, m2, m3) thì sẽ vào patition theo sắp xếp:
+<br/> &nbsp;    &nbsp;- part0 chứa m0. part1 chứa m1. part2 chứa m2. part3 chứa m3
+<br/> messesage lấy về các consumer sẽ có vị trí: 
+<br/> &nbsp;    &nbsp;- Group1: consummer0 nhận m0. consummer1 nhận m1. consummer2 nhận m2. consummer3 nhận m3
+<br/> &nbsp;    &nbsp;- Group2: consummer0 nhận m0,m1. consummer0 nhận m2,m3
+<br/> Giả sử là các consumer chạy cùng tiến trình spark, nhận message về, cùng xử lý và cùng đẩy kết quả ra một topic đích, thì hiệu năng xử lý sẽ tăng đáng kể.
+<img alt="" src="../images/kafka_atrcon2.png" /></li>
+<li>Ví dụ 1 consumer chết, các consumer khác trong group sẽ tiếp nhận thay các message từ message mà consumer chết nhận được cuối cùng =&gt; failover
+<br/> Tuy vậy ta thấy: theo cơ chế, kafka không track xem consumer đã nhận được message nào, vậy làm thế nào các consumer cùng group biết để takeover? 
+<br/> - Mỗi consumer khi đọc một messeage tại offset nhất định trên partition, sẽ thực hiện thao tác gọi là commit: ghi offset hiện tại vào một topic đặc biệt tên là __consumer_offsets topic.
+<br/> ví dụ: trong trường hợp trên, 2 consumer 3 và 4 chết. Kafka rebalance lại phân phối patititon cho group
+<br/> &nbsp;    &nbsp;- Group1: consummer0 nối part0,part3. consummer1 nối part1,part3. như hình dưới
+<img alt="" src="../images/kafka_atrcon3.png" />
+Consumer vào làm việc, sẽ lấy vào &ldquo;latest committed offset&rdquo; của mối partition từ __consumer_offsets topic và takeover
+<br/> Chú ý rằng: nhiệm vụ commit thuộc về phía consumer, tức người lập trình ra ứng dụng, kafka broker không có nhiệm vụ gì trong này (ngoài tự động tạo ra __consumer_offsets topic).
+<br/> Việc commit có thể ảnh hưởng đến kết quả xử lý, vd:
+<br/> Thực tế đang xử lý tới offset 10, trong khi mới commit tới offset 2. Khi lỗi xảy ra buộc ta lại quay lại offset 2 xử lý. Đây có thể là lỗi - khi một messeage bị xử lý 2 lần; cũng có thể là tính năng: -vận dụng hợp lý sẽ như một điểm checkpoint cho luồng, mục đích là khi lỗi sẽ roolback để xử lý lại đoạn 2 đến 10.
+<img alt="" src="../images/kafka_atrcon4.png" /></li>
+</ul>
+<p>Producer với nhiệm vụ đẩy dữ liệu vào kafka. Có một số điểm đáng chú ý sau:</p>
+<ul>
+<li>Kafka cung cấp cơ chế cho producer đợi messeage vừa gửi đi đến các mức level: </li>
+<li>Ack = all: đợi cho leader và tất cả các replicate đã ghi rồi gửi tiếp messeage khác</li>
+<li>Ack = 1: chỉ đợi leader xác nhận đã ghi</li>
+<li>Ack = 0: không đợi, gửi luôn messeage khác</li>
+<li>Kafka cung cấp cơ chế tạo các producer với 2 mode đặc biệt:</li>
+<li>Idempotent : đảm với 1 messeage yêu cầu ghi thì chỉ đúng 1 messeage xuất hiện trong topic</li>
+<li>Transactional : đảm bảo một nhóm các messeage cùng được gửi với nhau.</li>
+</ul>
+<h3 id="ref">Ref<a class="headerlink" href="#ref" title="Permanent link">&para;</a></h3>
+<p>http://cloudurable.com/blog/kafka-architecture/index.html</p>
+<p>https://kafka.apache.org/documentation/</p>
+<p>https://www.oreilly.com/library/view/kafka-the-definitive/9781491936153/ch04.html</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/cloud-guru/message_queue" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+      
+    </span>
+</div>
+    <script>var base_url = '../../../..';</script>
+    <script src="../../../../js/theme.js" defer></script>
+      <script src="../../../../search/main.js" defer></script>
+
+</body>
+</html>
